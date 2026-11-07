@@ -1,0 +1,35 @@
+# Core Framework
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+pydantic-settings==2.6.0
+python-dotenv==1.0.1
+python-multipart==0.0.17
+
+# Quantum Computing - Classiq
+classiq==0.52.0
+
+# Quantum Computing - qBraid
+qbraid==0.8.3
+qbraid[visualization]==0.8.3
+
+# Quantum Computing - Qiskit (fallback)
+qiskit==1.2.4
+qiskit-aer==0.15.1
+
+# Scientific Computing
+numpy==1.26.4
+scipy==1.14.1
+pandas==2.2.3
+
+# Optional: PennyLane for circuit visualization
+pennylane==0.39.0
+
+# Development & Testing
+pytest==8.3.3
+pytest-asyncio==0.24.0
+pytest-cov==6.0.0
+httpx==0.27.2
+
+# Utilities
+python-dateutil==2.9.0

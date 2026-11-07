@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: quantabench-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Classiq credentials
+      - CLASSIQ_CLIENT_ID=${CLASSIQ_CLIENT_ID}
+      - CLASSIQ_CLIENT_SECRET=${CLASSIQ_CLIENT_SECRET}
+      # qBraid credentials
+      - QBRAID_API_KEY=${QBRAID_API_KEY}
+      # Optional: IonQ
+      - IONQ_API_KEY=${IONQ_API_KEY}
+      # Feature flags
+      - ENABLE_CLASSIQ=${ENABLE_CLASSIQ:-false}
+      - ENABLE_QBRAID=${ENABLE_QBRAID:-false}
+      - ENABLE_HARDWARE=${ENABLE_HARDWARE:-false}
+      # Cache configuration
+      - CACHE_ENABLED=${CACHE_ENABLED:-true}
+      - CACHE_DIR=/app/cache
+      - CACHE_TTL_HOURS=${CACHE_TTL_HOURS:-168}
+      # Logging
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./backend/cache:/app/cache
+      - ./backend/app:/app/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: "./QuantaBench Frontend/quanta-main"
+      dockerfile: Dockerfile
+    container_name: quantabench-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  cache:
+    driver: local

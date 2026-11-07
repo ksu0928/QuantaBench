@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+env/
+ENV/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Backend specific
+backend/cache/
+backend/.env
+backend/*.log
+
+# Node.js / Frontend
+node_modules/
+.next/
+out/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Frontend specific
+QuantaBench Frontend/quanta-main/.next/
+QuantaBench Frontend/quanta-main/node_modules/
+QuantaBench Frontend/quanta-main/.env.local
+QuantaBench Frontend/quanta-main/out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# Docker
+*.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Misc
+.vercel
+*.pem
